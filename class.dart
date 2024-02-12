@@ -1,7 +1,7 @@
 //Syntax:
         class ClassName {
                 // properties or fields
-                // methods or functions}
+                // methods or functions
                 }
 
 class Student {
