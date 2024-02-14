@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
           title: Text("Drawer"),
           backgroundColor: Colors.blue,
         ),
-        drawer: Drawer(                                        //drawer starting point 
+        drawer: Drawer(                                        //drawer starting point. 
           elevation: 16.0,
           child: Column(children: <Widget>[
             UserAccountsDrawerHeader(
