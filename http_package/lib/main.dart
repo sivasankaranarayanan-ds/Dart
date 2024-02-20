@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +23,45 @@ class MyApp extends StatelessWidget {
 
   Widget content() {
     return Center(
-      child: Container(
-        child: ElevatedButton(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
             onPressed: () async {
-              var url = Uri.http(
-                  "my-json-server.typicode.com", "/typicode/demo/posts");
-              var response = await http.get(url);
-              print("Response Code: ${response.statusCode}");
-              print("Response body ${response.body}");
+              await fetchPost();
             },
-            child: const Text('http call')),
+            child: const Text('GET Call'),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () async {
+              await createPost();
+            },
+            child: const Text('POST Call'),
+          ),
+        ],
       ),
     );
+  }
+
+  Future<void> fetchPost() async {
+    var url = Uri.http("my-json-server.typicode.com", "/typicode/demo/posts");
+    var response = await http.get(url);
+    print("GET Response Code: ${response.statusCode}");
+    print("GET Response body: ${response.body}");
+  }
+
+  Future<void> createPost() async {
+    var url = Uri.http("my-json-server.typicode.com", "/typicode/demo/posts");
+    var response = await http.post(
+      url,
+      body: <String, String>{
+        'title': 'foo',
+        'body': 'bar',
+        'userId': '1',
+      },
+    );
+    print("POST Response Code: ${response.statusCode}");
+    print("POST Response body: ${response.body}");
   }
 }
